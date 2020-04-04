@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euox pipefail
+
+# TODO do magic to build both a Fedora and a Debian container, by copying a template and sed --FROM--
+
+podman build .
+
+# TODO -t cloudshell-[fedora/debian]
