@@ -16,10 +16,10 @@ You can now access a web-based shell on http://localhost:8080! (Login with the _
 
 ## Features
 
-* Super simple to use & run!
-* Regular user account (not `root`)
-* `sudo` works (useful e.g. for quick package installation)
-
+* is simple to use & run!
+* has regular user account (not `root`)
+* has `sudo` working (useful e.g. for quick package installation)
+* customizable by deriving your own container `FROM cloudshell` (this one); [as e.g. in this Dockerfile](https://github.com/vorburger/vorburger-dotfiles-bin-etc/blob/master/Dockerfile-cloudshell)
 
 ## Based on
 
