@@ -4,8 +4,6 @@ set -euo pipefail
 # This init script is from https://github.com/vorburger/cloudshell
 # Original Author: Michael Vorburger <mike@vorburger.ch> http://www.vorburger.ch
 
-# TODO hostname test
-
 if [ -z ${USER_ID+x} ]; then echo "USER_ID must be set!"; exit 3; fi
 if [ -z ${USER_PWD+x} ]; then echo "USER_PWD must be set!"; exit 4; fi
 

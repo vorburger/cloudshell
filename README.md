@@ -9,16 +9,17 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 
     ./build
 
-    podman run -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora
+    docker | podman run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora
 
-You can now access a web-based shell on http://localhost:8080, login with the _YOURUID_ & _YOURPWD_ chosen above.
+You can now access a web-based shell on http://localhost:8080! (Login with the _YOURUID_ & _YOURPWD_ chosen above.)
 
 
 ## Features
 
 * Super simple to use & run!
-* Regular user account, not `root`
+* Regular user account (not `root`)
 * `sudo` works (useful e.g. for quick package installation)
+
 
 ## Based on
 
