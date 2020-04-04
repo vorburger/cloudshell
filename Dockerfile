@@ -10,7 +10,8 @@ RUN dnf update -y
 FROM fedora-updated AS fedora-plus
 # For CentOS instead of Fedora, use /etc/yum.conf instead of /etc/dnf/dnf.conf:
 RUN sed -i -e '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf \
- && dnf install -y openssh-clients git findutils man-db man man-pages less which nano micro zsh fish
+ && dnf install -y openssh-clients git findutils man-db man man-pages less which \
+                   nano micro zsh fish iputils net-tools
 
 FROM fedora-plus AS cloudshell-fedora
 COPY --from=gotty-build /go/bin/gotty /gotty
