@@ -12,13 +12,13 @@ FROM fedora-updated AS fedora-plus
 RUN sed -i -e '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf \
  && dnf install -y openssh-clients git hub findutils man-db man man-pages less which htop \
                    nano micro bash-completion zsh fish iputils net-tools golang-bin \
-                   powerline-fonts ShellCheck tmux
+                   powerline-fonts ShellCheck tmux procps-ng psmisc
 
 FROM fedora-plus AS cloudshell-fedora
 COPY --from=gotty-build /go/bin/gotty /gotty
 COPY ./init /init
 ENV TERM=xterm-256color
 EXPOSE 8080
-ENTRYPOINT /gotty --credential "$USER_ID":"$USER_PWD" --permit-write /init bash
+ENTRYPOINT /gotty --credential "$USER_ID":"$USER_PWD" --permit-write /init tmux new -A -s CLOUD
 
 # TODO support other shell than bash (zsh, fish, ..) based on the SHELL environment variable

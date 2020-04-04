@@ -21,6 +21,7 @@ You can now access a web-based shell on http://localhost:8080! (Login with the _
 * has `sudo` working (useful e.g. for quick package installation)
 * customizable by deriving your own container `FROM cloudshell` (this one); [as e.g. in this Dockerfile](https://github.com/vorburger/vorburger-dotfiles-bin-etc/blob/master/Dockerfile-cloudshell)
 
+
 ## Based on
 
 * https://xtermjs.org _(via gotty)_
