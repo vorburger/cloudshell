@@ -8,7 +8,7 @@ FROM debian:latest AS debian-updated
 RUN apt-get update -y
 
 FROM debian-updated AS debian-plus
-RUN apt-get install -y git hub findutils less htop \
+RUN apt-get install -y sudo git hub findutils less htop \
                    nano bash-completion zsh fish net-tools \
                    tmux psmisc
 

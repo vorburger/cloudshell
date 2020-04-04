@@ -64,4 +64,4 @@ ${PODMAN_OR_DOCKER} build -f Dockerfile-Fedora -t cloudshell-fedora .
 test_container "cloudshell-fedora"
 
 ${PODMAN_OR_DOCKER} build -f Dockerfile-Debian -t cloudshell-debian .
-# TODO.. test_container "cloudshell-debian"
+test_container "cloudshell-debian"

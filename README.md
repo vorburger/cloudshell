@@ -9,7 +9,9 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 
     ./build
 
-    docker | podman run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora
+    sudo docker run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-debian
+
+    podman run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora
 
 You can now access a web-based shell on http://localhost:8080! (Login with the _YOURUID_ & _YOURPWD_ chosen above.)
 
@@ -24,6 +26,7 @@ You can now access a web-based shell on http://localhost:8080! (Login with the _
 ## Features
 
 * is simple to use & run!
+* both Debian and Fedora containers
 * has regular user account (not `root`)
 * has `sudo` working (useful e.g. for quick package installation)
 * customizable by deriving your own container `FROM cloudshell` (this one); [as e.g. in this Dockerfile](https://github.com/vorburger/vorburger-dotfiles-bin-etc/blob/master/Dockerfile-cloudshell)
@@ -33,7 +36,7 @@ You can now access a web-based shell on http://localhost:8080! (Login with the _
 
 * https://xtermjs.org _(via gotty)_
 * https://hterm.org ([on chromium.googlesource.com](https://chromium.googlesource.com/apps/libapps/+/HEAD/hterm), _via gotty)_
-* https://github.com/vorburger/GoTTY (forked from https://github.com/yudai/GoTTY)
+* https://github.com/vorburger/GoTTY (forked from https://github.com/yudai/GoTTY); BTW note https://github.com/moul/gotty-client
 
 
 ## Similar projects (not open source)

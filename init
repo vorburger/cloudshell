@@ -8,8 +8,10 @@ if [ -z ${USER_ID+x} ]; then echo "USER_ID must be set!"; exit 3; fi
 if [ -z ${USER_PWD+x} ]; then echo "USER_PWD must be set!"; exit 4; fi
 
 # adding user if it doesn't already exist (for tests in build script),
-# and add her to system group "wheel", so that she can "sudo"
-id -u "$USER_ID" >/dev/null 2>&1 || useradd -G wheel "$USER_ID"
+# and add her to system group "wheel" (Fedora) or "sudo" (Debian), so that she can use "sudo" later
+id -u "$USER_ID" >/dev/null 2>&1 || useradd --create-home "$USER_ID"
+usermod -a -G wheel "$USER_ID" >/dev/null 2>&1 || true
+usermod -a -G sudo "$USER_ID" >/dev/null 2>&1 || true
 cd /home/"$USER_ID"
 
 if [ -z ${USER_SHELL+x} ]; then
@@ -22,9 +24,14 @@ fi
 # It's only used for authentication to GoTTY (in Dockerfile); we don't need it in-container,
 # and it's more secure not to leave it in a file in the container if ther is no reason to.
 
-# tweak /etc/sudoers so that she can sudo without password
+# tweak /etc/sudoers so that she can sudo without password..
+# .. for Fedora:
 sed -i 's/^%wheel/# %wheel/' /etc/sudoers
 sed -i 's/^# %wheel/%wheel/' /etc/sudoers
+# .. for Debian:
+if [ -f /etc/sudoers.d/README ]; then
+  echo "%sudo   ALL=(ALL:ALL) NOPASSWD: ALL" >/etc/sudoers.d/NOPASSWD
+fi
 
 # https://github.com/sudo-project/sudo/issues/42
 # https://bugzilla.redhat.com/show_bug.cgi?id=1773148
