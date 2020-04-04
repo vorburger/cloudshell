@@ -7,12 +7,12 @@ RUN go get github.com/yudai/gotty \
 FROM fedora:latest AS fedora-updated
 RUN dnf update -y
 
-# TODO dnf install -y hostname
-# `hostname` is used in our init script
+FROM fedora-updated AS fedora-plus
+# For CentOS instead of Fedora, use /etc/yum.conf instead of /etc/dnf/dnf.conf:
+RUN sed -i -e '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf \
+ && dnf install -y openssh-clients git findutils man-db man man-pages less which nano micro zsh fish
 
-# TODO man, https://github.com/vorburger/vorburger-dotfiles-bin-etc/blob/master/container/devshell/Dockerfile
-
-FROM fedora-updated AS cloudshell-fedora
+FROM fedora-plus AS cloudshell-fedora
 COPY --from=gotty-build /go/bin/gotty /gotty
 COPY ./init /init
 ENV TERM=xterm-256color
