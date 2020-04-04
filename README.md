@@ -8,4 +8,4 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 
     ./build
 
-    podman run --rm -p 8080:8080 cloudshell-fedora
+    podman run -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora

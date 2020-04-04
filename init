@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# if [ -z ${GOTTY_CREDENTIAL+x} ]; then echo "GOTTY_CREDENTIAL must be set!"; exit 3; fi
+# USER_ID="$(echo "$GOTTY_CREDENTIAL" | cut -d':' -f1)"
+
+if [ -z ${USER_ID+x} ]; then echo "USER_ID must be set!"; exit 3; fi
+if [ -z ${USER_PWD+x} ]; then echo "USER_PWD must be set!"; exit 4; fi
+
+useradd "$USER_ID"
+
+# TODO support other shell than bash (zsh, fish, ..) based on the SHELL environment variable
+setpriv --reuid="$USER_ID" --regid="$USER_ID" --init-groups --no-new-privs --reset-env bash
+
+# TODO document setpriv VS runuser VS 'su --login "$USER_ID" bash'

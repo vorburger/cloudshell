@@ -9,8 +9,7 @@ RUN dnf update -y
 
 FROM fedora-updated AS cloudshell-fedora
 COPY --from=gotty-build /go/bin/gotty /gotty
+COPY ./init /init
 ENV TERM=xterm-256color
 EXPOSE 8080
-ENTRYPOINT ["/gotty", "--permit-write"]
-CMD ["bash"]
-# TODO allow customization for other shells
+ENTRYPOINT /gotty --credential "$USER_ID":"$USER_PWD" --permit-write /init
