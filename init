@@ -13,9 +13,9 @@ id -u "$USER_ID" >/dev/null 2>&1 || useradd -G wheel "$USER_ID"
 cd /home/"$USER_ID"
 
 if [ -z ${USER_SHELL+x} ]; then
-  chsh -s /usr/bin/fish "$USER_ID"
+  chsh -s /usr/bin/fish "$USER_ID" >/dev/null 2>&1
 else
-  chsh -s "$USER_SHELL" "$USER_ID"
+  chsh -s "$USER_SHELL" "$USER_ID" >/dev/null 2>&1
 fi
 
 # NOTE we're not actually setting the user's password in the container!
