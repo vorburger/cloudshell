@@ -6,7 +6,7 @@ set -euox pipefail
 
 
 # TODO check if 'podman' is available and use that if so, otherwise run with 'docker'
-PODMAN_OR_DOCKER=podman
+PODMAN_OR_DOCKER="sudo docker"
 
 
 function test_container() {
@@ -56,10 +56,12 @@ function test_container() {
 
 shellcheck -a build init
 
-# This helps to really pull the latest (without this, any old one from previous builds is used; at least with podman)
+# This helps to really pull the latest (without this, any old one from previous builds is used; at least with podmanm)
+${PODMAN_OR_DOCKER} pull debian:latest
 ${PODMAN_OR_DOCKER} pull fedora:latest
 
-${PODMAN_OR_DOCKER} build -t cloudshell-fedora .
-# TODO -t cloudshell-debian ... the problem is -t only works for the last image, so must parse output and map
-
+${PODMAN_OR_DOCKER} build -f Dockerfile-Fedora -t cloudshell-fedora .
 test_container "cloudshell-fedora"
+
+${PODMAN_OR_DOCKER} build -f Dockerfile-Debian -t cloudshell-debian .
+# TODO.. test_container "cloudshell-debian"

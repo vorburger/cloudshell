@@ -1,7 +1,5 @@
 - [ ] Google Cloud Run?
 
-- [ ] Debian, like Fedora
-
 - [ ] allow building containers, and push, and run (remote) - from inside this container!
 
 - [ ] auth with webauthn
