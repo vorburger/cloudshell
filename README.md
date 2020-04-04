@@ -14,9 +14,11 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 You can now access a web-based shell on http://localhost:8080! (Login with the _YOURUID_ & _YOURPWD_ chosen above.)
 
 
-### Options
+### Optional additional container environment variables
 
-* -e `USER_SHELL` can be set to `/usr/bin/bash` or `/usr/bin/zsh` instead of the default [Fish shell](https://fishshell.com).
+* `USER_SHELL` can be set to `/usr/bin/bash` or `/usr/bin/zsh` instead of the default [Fish shell](https://fishshell.com).
+* `GOTTY_TERM` can be set to `hterm` instead of the default `xterm`
+* `GOTTY_TITLE_FORMAT` = "Cloud Shell" (or whatever HTML TITLE you like)
 
 
 ## Features
