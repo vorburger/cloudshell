@@ -56,6 +56,9 @@ function test_container() {
 
 shellcheck -a build init
 
+# This helps to really pull the latest (without this, any old one from previous builds is used; at least with podman)
+${PODMAN_OR_DOCKER} pull fedora:latest
+
 ${PODMAN_OR_DOCKER} build -t cloudshell-fedora .
 # TODO -t cloudshell-debian ... the problem is -t only works for the last image, so must parse output and map
 

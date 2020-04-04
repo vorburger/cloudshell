@@ -4,8 +4,7 @@ RUN go get github.com/yudai/gotty \
 
 # TODO add Debian variant..
 
-# TODO :latest ==> 31 instead of 30 ?
-FROM fedora AS fedora-updated
+FROM fedora:latest AS fedora-updated
 RUN dnf update -y
 
 # TODO dnf install -y hostname
