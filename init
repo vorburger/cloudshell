@@ -12,6 +12,12 @@ if [ -z ${USER_PWD+x} ]; then echo "USER_PWD must be set!"; exit 4; fi
 id -u "$USER_ID" >/dev/null 2>&1 || useradd -G wheel "$USER_ID"
 cd /home/"$USER_ID"
 
+if [ -z ${USER_SHELL+x} ]; then
+  chsh -s /usr/bin/fish "$USER_ID"
+else
+  chsh -s "$USER_SHELL" "$USER_ID"
+fi
+
 # NOTE we're not actually setting the user's password in the container!
 # It's only used for authentication to GoTTY (in Dockerfile); we don't need it in-container,
 # and it's more secure not to leave it in a file in the container if ther is no reason to.

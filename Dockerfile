@@ -11,7 +11,7 @@ FROM fedora-updated AS fedora-plus
 # For CentOS instead of Fedora, use /etc/yum.conf instead of /etc/dnf/dnf.conf:
 RUN sed -i -e '/tsflags=nodocs/s/^/#/' /etc/dnf/dnf.conf \
  && dnf install -y openssh-clients git hub findutils man-db man man-pages less which htop \
-                   nano micro bash-completion zsh fish iputils net-tools golang-bin \
+                   nano micro bash-completion util-linux-user zsh fish iputils net-tools golang-bin \
                    powerline-fonts ShellCheck tmux procps-ng psmisc
 
 FROM fedora-plus AS cloudshell-fedora
