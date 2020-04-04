@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euox pipefail
 
+# This init script is from https://github.com/vorburger/cloudshell
+# Original Author: Michael Vorburger <mike@vorburger.ch> http://www.vorburger.ch
+
+
 # TODO check if 'podman' is available and use that if so, otherwise run with 'docker'
 PODMAN_OR_DOCKER=podman
 
@@ -10,29 +14,43 @@ function test_container() {
 
   CONTAINER_ID=$(${PODMAN_OR_DOCKER} run --name "${name}"-test -d -eUSER_ID=tester -eUSER_PWD=testit -p 8080 "${name}")
 
-  # sleep is required because after docker run returns, the container is up but our server may not quite be yet
-  # sleep 1
+  # Test that `whoami` returns "tester"
+  WHOAMI=$(${PODMAN_OR_DOCKER} exec "${name}"-test /init whoami)
+  if [ ! "$WHOAMI" = 'tester' ]; then
+    echo "TEST FAILED, whoami != tester: $WHOAMI"
+    ${PODMAN_OR_DOCKER} rm -f "$CONTAINER_ID"
+    return 1
+  fi
+
+  # Test that `sudo` works
+  GROOT=$(${PODMAN_OR_DOCKER} exec "${name}"-test /init sudo echo groot)
+  if [ ! "$GROOT" = 'groot' ]; then
+    echo "TEST FAILED, sudo does not work, I am not groot, but: $GROOT"
+    ${PODMAN_OR_DOCKER} rm -f "$CONTAINER_ID"
+    return 1
+  fi
 
   HTTP_PORT="$(${PODMAN_OR_DOCKER} ps|grep "${name}"-test|sed 's/.*0.0.0.0://g'|sed 's/->.*//g')"
 
-  # Access without uid & pwd should fail..
+  # Test that HTTP GET without uid & pwd fails
   if ! curl --silent --show-error http://localhost:"$HTTP_PORT"; then
     echo "TEST FAILED, accessible without BASIC auth"
     ${PODMAN_OR_DOCKER} rm -f "$CONTAINER_ID"
     return 1
   fi
 
+  # Test that HTTP GET with uid & pwd on BASIC auth returns GoTTY HTML page
   HTTP_REPLY=$(curl --user tester:testit --silent --show-error http://localhost:"$HTTP_PORT" | head --lines=1 -)
 
   ${PODMAN_OR_DOCKER} rm -f "$CONTAINER_ID"
 
-  if [ "$HTTP_REPLY" = '<!doctype html>' ]; then
-    echo "TEST PASSED"
-    return 0
-  else
+  if [ ! "$HTTP_REPLY" = '<!doctype html>' ]; then
     echo "TEST FAILED, not starting with expected <!doctype html>: $HTTP_REPLY"
     return 1
   fi
+
+  echo "TEST PASSED"
+  return 0
 }
 
 

@@ -14,6 +14,12 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 You can now access a web-based shell on http://localhost:8080, login with the _YOURUID_ & _YOURPWD_ chosen above.
 
 
+## Features
+
+* Super simple to use & run!
+* Regular user account, not `root`
+* `sudo` works (useful e.g. for quick package installation)
+
 ## Based on
 
 * https://xtermjs.org _(via gotty)_
