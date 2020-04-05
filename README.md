@@ -7,11 +7,9 @@ Container running a Web Terminal to a Linux Shell for development in a ☁️  C
 
 ### Locally
 
-    ./build
+    sudo docker run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 gcr.io/vorburger/github.com/vorburger/cloudshell-debian
 
-    sudo docker run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-debian
-
-    podman run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 cloudshell-fedora
+    podman run --hostname=testhost -eUSER_ID=YOURUID -eUSER_PWD=YOURPWD --rm -p 8080:8080 gcr.io/vorburger/github.com/vorburger/cloudshell-fedora
 
 You can now access a web-based shell on http://localhost:8080! (Login with the _YOURUID_ & _YOURPWD_ chosen above.)
 
@@ -25,11 +23,19 @@ You can now access a web-based shell on http://localhost:8080! (Login with the _
 
 ## Features
 
-* is simple to use & run!
-* both Debian and Fedora containers
+* is simple to use & run, available from a container registery
+* offers both Debian and Fedora containers
 * has regular user account (not `root`)
 * has `sudo` working (useful e.g. for quick package installation)
 * customizable by deriving your own container `FROM cloudshell` (this one); [as e.g. in this Dockerfile](https://github.com/vorburger/vorburger-dotfiles-bin-etc/blob/master/Dockerfile-cloudshell)
+
+
+## Develop
+
+    ./build
+
+Now simply run like in the _Locally_ section above, but use only `cloudshell-fedora`
+(or `cloudshell-debian`) instead of pulling from the remote `gcr.io/...` registry.
 
 
 ## Based on
