@@ -50,3 +50,9 @@ Now simply run like in the _Locally_ section above, but use only `cloudshell-fed
 * https://ssh.cloud.google.com
 * https://shell.azure.com
 * https://www.google.com/search?q=cloud+shell
+
+
+## References
+
+* http://blog2.vorburger.ch/2020/04/open-cloud-web-terminal-shell.html
+* https://github.com/kubernetes/minikube/issues/7419

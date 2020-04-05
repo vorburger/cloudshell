@@ -1,4 +1,4 @@
-- [ ] Google Cloud Run?
+- [ ] minikube addon?
 
 - [ ] allow building containers, and push, and run (remote) - from inside this container!
 
