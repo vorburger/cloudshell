@@ -45,6 +45,11 @@ Now simply run like in the _Locally_ section above, but use only `cloudshell-fed
 * https://github.com/vorburger/GoTTY (forked from https://github.com/yudai/GoTTY); BTW note https://github.com/moul/gotty-client
 
 
+## Similar projects (open source)
+
+* https://github.com/paradoxxxzero/butterfly
+
+
 ## Similar projects (not open source)
 
 * https://ssh.cloud.google.com
