@@ -47,6 +47,7 @@ Now simply run like in the _Locally_ section above, but use only `cloudshell-fed
 
 ## Similar projects (open source)
 
+* https://github.com/shellinabox/shellinabox
 * https://github.com/paradoxxxzero/butterfly
 
 
